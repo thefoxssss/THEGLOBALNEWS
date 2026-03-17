@@ -1,313 +1,398 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Global Monitor News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Base Styles */
-        :root {
-            --primary-color: #1a365d;
-            --secondary-color: #c53030;
-            --bg-color: #f7fafc;
-            --text-color: #2d3748;
-            --light-text: #718096;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--secondary-color);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        nav ul li a {
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Main Content Layout */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 5%;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        /* Featured Article */
-        .featured-article {
-            grid-column: 1 / -1;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .img-placeholder {
-            background-color: #e2e8f0;
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Oswald:wght@400;700&display=swap');
+        
+        body { font-family: 'Merriweather', serif; }
+        h1, h2, h3, h4, .sans { font-family: 'Oswald', sans-serif; }
+        
+        .ticker-wrap {
             width: 100%;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-text);
-            font-size: 1.2rem;
-        }
-
-        .article-content {
-            padding: 1.5rem;
-        }
-
-        .tag {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .featured-article h2 {
-            font-size: 2rem;
-            margin: 1rem 0;
-            color: var(--primary-color);
-        }
-
-        /* Article Grid */
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card .img-placeholder {
-            height: 180px;
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-
-        .sidebar h3 {
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .trending-item {
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 1rem;
-        }
-
-        .trending-item:last-child {
-            border-bottom: none;
-        }
-
-        .trending-item h4 {
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            color: var(--primary-color);
-        }
-
-        .trending-item p {
-            font-size: 0.85rem;
-            color: var(--light-text);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
+            background-color: #b91c1c; /* red-700 */
             color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            box-sizing: border-box;
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            main {
-                grid-template-columns: 1fr;
-            }
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .img-placeholder {
-                height: 250px;
-            }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: ticker;
+            animation-duration: 35s;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        .dropcap {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            font-weight: 900;
+            color: #111827; /* gray-900 */
         }
     </style>
 </head>
-<body>
-
-    <header>
-        <div class="header-content">
-            <div class="logo">The Global <span>Monitor</span> News</div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">World</a></li>
-                    <li><a href="#">Politics</a></li>
-                    <li><a href="#">Business</a></li>
-                    <li><a href="#">Tech</a></li>
-                    <li><a href="#">Science</a></li>
-                </ul>
-            </nav>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Header -->
+    <header class="bg-white border-b-8 border-red-800">
+        <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex flex-col items-center md:items-start cursor-pointer" onclick="loadArticle('alien')">
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-gray-900 uppercase">
+                    The Global Monitor<span class="text-red-700">News</span>
+                </h1>
+                <p class="text-gray-500 text-sm font-bold tracking-widest uppercase mt-1">"Truth in Every Syllable"</p>
+            </div>
+            <div class="text-sm font-bold text-gray-600 hidden md:block mt-4 md:mt-0 bg-gray-100 p-2 rounded">
+                <span id="current-date"></span> | Edition: North America
+            </div>
         </div>
+        <nav class="bg-gray-900 text-white text-md uppercase sans tracking-wide">
+            <div class="container mx-auto px-4">
+                <ul class="flex space-x-8 py-3 overflow-x-auto">
+                    <li><a href="#" onclick="loadArticle('alien'); return false;" class="hover:text-red-400 transition">Front Page</a></li>
+                    <li><a href="#" class="hover:text-red-400 transition">World</a></li>
+                    <li><a href="#" class="hover:text-red-400 transition">Politics</a></li>
+                    <li><a href="#" class="hover:text-red-400 transition">Science & Tech</a></li>
+                    <li><a href="#" class="hover:text-red-400 transition">Local</a></li>
+                    <li><a href="#" class="hover:text-red-400 transition text-yellow-400">Investigations</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
-    <main>
-        <div class="main-articles">
-            <article class="featured-article">
-                <div class="img-placeholder">[Featured Image Placeholder]</div>
-                <div class="article-content">
-                    <span class="tag">Breaking</span>
-                    <h2>Global Summit Reaches Historic Agreement on Climate Action</h2>
-                    <p>Leaders from over 150 nations have signed a comprehensive treaty aiming to accelerate the transition to renewable energy systems by the end of the decade...</p>
-                </div>
-            </article>
-
-            <div class="article-grid">
-                <article class="card">
-                    <div class="img-placeholder">[Image]</div>
-                    <div class="article-content">
-                        <span class="tag" style="background-color: #3182ce;">Tech</span>
-                        <h3>New AI Breakthrough Changes Software Development</h3>
-                    </div>
-                </article>
-                <article class="card">
-                    <div class="img-placeholder">[Image]</div>
-                    <div class="article-content">
-                        <span class="tag" style="background-color: #38a169;">Economy</span>
-                        <h3>Markets Rally as Inflation Shows Signs of Cooling</h3>
-                    </div>
-                </article>
-                <article class="card">
-                    <div class="img-placeholder">[Image]</div>
-                    <div class="article-content">
-                        <span class="tag" style="background-color: #d69e2e;">Science</span>
-                        <h3>Astronomers Discover Earth-Sized Exoplanet</h3>
-                    </div>
-                </article>
-                <article class="card">
-                    <div class="img-placeholder">[Image]</div>
-                    <div class="article-content">
-                        <span class="tag" style="background-color: #805ad5;">Culture</span>
-                        <h3>The Rise of Digital Art in Modern Museums</h3>
-                    </div>
-                </article>
-            </div>
+    <!-- Breaking News Ticker -->
+    <div class="ticker-wrap sans text-sm md:text-base font-bold py-2 tracking-wider">
+        <div class="ticker">
+            BREAKING: FEDERAL RESERVE ANNOUNCES QUARTER-POINT INTEREST RATE HIKE • SENATE PASSES BIPARTISAN INFRASTRUCTURE REPAIR BILL • NEW STUDY LINKS MEDITERRANEAN DIET TO IMPROVED COGNITIVE FUNCTION IN OLDER ADULTS • TECH STOCKS RALLY FOLLOWING POSITIVE EARNINGS REPORTS FROM MAJOR GIANTS •
         </div>
+    </div>
 
-        <aside class="sidebar">
-            <h3>Trending Now</h3>
-            <div class="trending-item">
-                <h4><a href="#">Election results finalize in key battleground states</a></h4>
-                <p>2 hours ago</p>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+        
+        <!-- Main Article Section -->
+        <article id="main-article" class="lg:w-2/3 bg-white p-6 md:p-10 shadow-md border border-gray-300">
+            <div class="mb-4 flex items-center gap-3">
+                <span id="article-tag" class="bg-red-700 text-white text-sm font-bold uppercase px-3 py-1 rounded-sm sans tracking-wider">Exclusive Investigation</span>
+                <span id="article-category" class="text-gray-500 text-sm font-bold uppercase sans">Local News</span>
             </div>
-            <div class="trending-item">
-                <h4><a href="#">Major tech CEO announces surprise resignation</a></h4>
-                <p>4 hours ago</p>
+            
+            <h2 id="article-title" class="text-4xl md:text-5xl font-black mb-6 leading-tight">Alien Bovine Heist! Extraterrestrials Targeted Oakhaven Farms, Local Sheriff Claims</h2>
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-y-2 border-gray-100 py-3 mb-8">
+                <div class="flex items-center gap-3 mb-2 md:mb-0">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-gray-600 sans">AP</div>
+                    <div>
+                        <p id="article-author" class="font-bold text-sm">By Arthur Pendelton</p>
+                        <p id="article-author-title" class="text-xs text-gray-500">Senior Paranormal Correspondent</p>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-600 font-bold flex gap-4">
+                    <span>Updated: <span id="publish-date"></span></span>
+                    <span class="flex items-center gap-1 hover:text-blue-600 cursor-pointer"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg> Share</span>
+                </div>
             </div>
-            <div class="trending-item">
-                <h4><a href="#">Breakthrough in battery longevity reported</a></h4>
-                <p>6 hours ago</p>
+
+            <!-- Image Container -->
+            <div class="mb-8 relative bg-gray-900 w-full h-72 md:h-[500px] flex items-center justify-center overflow-hidden rounded-sm border border-gray-200" id="image-container">
+                <img id="article-image" src="image_4b7f47.png" alt="Blurry photo of UFO over cow pasture" class="w-full h-full object-cover" />
+                <div id="article-caption" class="absolute bottom-0 left-0 bg-black bg-opacity-80 text-white text-xs md:text-sm p-3 w-full border-t border-gray-700">
+                    <span class="font-bold text-red-400 uppercase tracking-wider">Fig 1:</span> A verified, leaked video still captured by local farmer Jedediah Smith shows an unidentified anomalous phenomenon (UAP) hovering over pasture 4 moments before the disappearances. (Credit: Oakhaven MUFON Chapter / Anonymous Source)
+                </div>
             </div>
-            <div class="trending-item">
-                <h4><a href="#">Global supply chains stabilize after months of delay</a></h4>
-                <p>8 hours ago</p>
+
+            <div id="article-body" class="prose max-w-none text-lg leading-relaxed text-gray-800 space-y-6">
+                <p><span class="dropcap sans">O</span>AKHAVEN, KS — Residents of the quiet agricultural community of Oakhaven are double-locking their barn doors, rationing tin foil, and looking to the skies this week following a string of bizarre, allegedly extraterrestrial, livestock thefts that have baffled local law enforcement.</p>
+
+                <p>According to Oakhaven County Sheriff "Big" Jim Higgins, over 40 head of prime dairy cattle have vanished without a trace over the past 72 hours. The only evidence left behind at the crime scenes? Perfectly circular scorch marks in the grass, flattened crop circles shaped suspiciously like milk cartons, and a lingering smell of ozone mixed with what Higgins describes as "burnt space-toast."</p>
+
+                <div class="my-10 p-6 bg-gray-50 border-l-8 border-red-700 shadow-sm relative">
+                    <span class="absolute top-0 left-0 text-6xl text-gray-300 font-serif leading-none opacity-50 transform -translate-x-2 -translate-y-4">"</span>
+                    <p class="font-bold text-xl md:text-2xl italic text-gray-800 relative z-10">
+                        I've seen rustlers, I've seen coyotes, and I've seen teenagers pulling pranks. But coyotes don't leave anti-gravity footprints, and rustlers don't beam Holsteins up into the clouds using a neon green tractor beam.
+                    </p>
+                    <p class="mt-4 text-sm font-bold text-gray-500 uppercase sans tracking-wider">— Sheriff "Big" Jim Higgins</p>
+                </div>
+
+                <p>The epicenter of the abductions appears to be the Smith Family Farm, located just off Route 9. Patriarch Jedediah Smith claims he was awakened at 2:13 AM on Tuesday by a high-pitched humming sound that violently rattled his dental fillings and caused his compass to spin wildly.</p>
+
+                <p>"I went out to the porch with my tactical flashlight," Smith recounted, his hands visibly shaking as he clutched a modified baseball cap lined with industrial-grade aluminum. "There was a massive silver disc hovering right over the main silo. It dropped a beam of pure, pulsating green light down on my prize-winning heifer, Bessie. She floated right up into the belly of that ship, mooing a tune I've never heard before. Sounded almost exactly like a 56k dial-up modem connecting to the internet."</p>
+
+                <h3 class="text-3xl font-black mt-10 mb-4 sans uppercase border-b-2 border-gray-200 pb-2">A Government Cover-Up?</h3>
+                
+                <p>Local authorities attempted to contact federal agencies regarding the missing herd, but an anonymous whistle-blower within the Department of Agriculture claims they were immediately instructed to classify the missing cows as a "mass sudden spontaneous localized migration event."</p>
+
+                <p>Dr. Aris Thorne, a self-proclaimed ufologist and former podiatrist who arrived in Oakhaven shortly after the news broke on local radio, believes the aliens are harvesting the cows for a highly advanced, sinister purpose.</p>
+                
+                <p>"Cows possess a unique multi-chambered stomach system," Dr. Thorne explained, adjusting his thick-rimmed glasses during a town hall meeting. "It is highly probable, mathematically speaking, that extraterrestrial visitors from the Zeta Reticuli system are utilizing concentrated bovine digestive enzymes to fuel their hyper-drive engines. It is basic intergalactic thermodynamics."</p>
+
+                <p>While a few skeptics point out that the Smith farm's fencing was recently described as "shoddy at best" and that a regional lucrative cattle auction was held the very same night, locals remain deeply unconvinced by conventional explanations. The town's sole hardware store has reportedly sold out of aluminum foil, high-powered spotlights, and an unusual amount of teriyaki beef jerky.</p>
+                
+                <p>As night falls on Oakhaven, the town holds its collective breath. Will the visitors return for more of Earth's livestock? Or have they finally acquired enough dairy for their cosmic needs? The Global Monitor News will continue to provide boots-on-the-ground updates on this developing intergalactic story.</p>
+            </div>
+
+            <!-- The Dad Test Reveal Button (Disguised) -->
+            <div class="mt-12 p-8 bg-gray-100 border-2 border-gray-300 rounded text-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-red-700 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
+                <div class="relative z-10 group-hover:text-white transition-colors duration-300">
+                    <h4 class="text-2xl font-black mb-2 sans uppercase tracking-wider group-hover:text-white text-gray-900">Verify Article Authenticity</h4>
+                    <p class="text-sm mb-6 sans group-hover:text-gray-100 text-gray-600">The Global Monitor News is committed to absolute journalistic integrity. We partner with independent fact-checkers. Click below to view the official sources, witness affidavits, and raw data used for this article.</p>
+                    <button onclick="revealPrank()" class="bg-gray-900 group-hover:bg-white group-hover:text-red-800 text-white font-bold py-4 px-8 rounded shadow-lg transition duration-300 sans text-lg uppercase tracking-widest border border-transparent group-hover:border-white">
+                        Access Source Documents
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="lg:w-1/3 space-y-8">
+            
+            <!-- Trending Now -->
+            <div class="bg-white p-6 shadow-md border border-gray-300">
+                <div class="flex items-center gap-2 mb-4 border-b-4 border-red-700 pb-2">
+                    <div class="w-3 h-3 bg-red-700 animate-pulse rounded-full"></div>
+                    <h3 class="text-2xl font-black uppercase sans tracking-wider">Trending Now</h3>
+                </div>
+                <ul class="space-y-5">
+                    <li class="group">
+                        <a href="#" onclick="loadArticle('markets'); return false;" class="text-gray-800 font-bold text-lg group-hover:text-red-700 transition leading-tight block">Global Markets Stabilize After Week of Unprecedented Volatility</a>
+                        <p class="text-xs text-red-600 font-bold uppercase sans mt-1 tracking-wider">Finance & Economy | 2 hours ago</p>
+                    </li>
+                    <li class="group border-t border-gray-100 pt-5">
+                        <a href="#" onclick="loadArticle('battery'); return false;" class="text-gray-800 font-bold text-lg group-hover:text-red-700 transition leading-tight block">Breakthrough in Solid-State Battery Tech Could Double EV Range</a>
+                        <p class="text-xs text-red-600 font-bold uppercase sans mt-1 tracking-wider">Science & Tech | 5 hours ago</p>
+                    </li>
+                    <li class="group border-t border-gray-100 pt-5">
+                        <a href="#" onclick="loadArticle('zoning'); return false;" class="text-gray-800 font-bold text-lg group-hover:text-red-700 transition leading-tight block">City Council Approves New Zoning Laws to Address Housing Shortage</a>
+                        <p class="text-xs text-red-600 font-bold uppercase sans mt-1 tracking-wider">Local Politics | Yesterday</p>
+                    </li>
+                    <li class="group border-t border-gray-100 pt-5">
+                        <a href="#" onclick="loadArticle('flu'); return false;" class="text-gray-800 font-bold text-lg group-hover:text-red-700 transition leading-tight block">Health Officials Advise Caution as Early Flu Season Impacts Midwest</a>
+                        <p class="text-xs text-red-600 font-bold uppercase sans mt-1 tracking-wider">Health & Wellness | Yesterday</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Advertisement (Fake) -->
+            <div class="bg-gray-50 p-6 text-center border border-gray-200 min-h-[300px] flex flex-col justify-center items-center relative overflow-hidden">
+                <span class="absolute top-2 right-2 text-[10px] text-gray-400 uppercase tracking-widest">Advertisement</span>
+                <div class="text-blue-600 mb-4">
+                    <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h4 class="font-black text-2xl mb-2 text-gray-800 sans uppercase">Secure Your Family's Future</h4>
+                <p class="text-sm text-gray-600 mb-6 font-serif">Comprehensive life insurance plans starting at just $15/month. Get a free quote today and enjoy peace of mind.</p>
+                <button class="bg-blue-600 text-white px-6 py-3 rounded text-sm font-bold shadow hover:bg-blue-700 uppercase tracking-wider sans w-full">Get a Free Quote</button>
+            </div>
+
+            <!-- Newsletter Box -->
+            <div class="bg-gray-900 text-white p-6 shadow-md">
+                <h3 class="text-xl font-black uppercase sans mb-2">Get the Truth Delivered</h3>
+                <p class="text-sm text-gray-400 mb-4 font-serif">Sign up for our daily newsletter and never miss an intergalactic update again.</p>
+                <input type="email" placeholder="Your Email Address" class="w-full p-3 text-gray-900 mb-3 font-sans rounded-sm border-none focus:ring-2 focus:ring-red-500 outline-none">
+                <button class="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-4 uppercase sans tracking-wider rounded-sm transition">Subscribe Now</button>
             </div>
         </aside>
     </main>
 
-    <footer>
-        <p>&copy; 2026 The Global Monitor News. All rights reserved.</p>
+    <!-- Modal for Reveal (The Test Result) -->
+    <div id="prank-modal" class="fixed inset-0 bg-black bg-opacity-90 hidden flex items-center justify-center z-50 px-4 backdrop-blur-sm">
+        <div class="bg-white p-8 md:p-12 max-w-xl w-full text-center shadow-2xl transform scale-90 transition-transform duration-500 border-t-8 border-red-600" id="modal-content">
+            <div class="text-7xl mb-4 animate-bounce">🚨</div>
+            <h2 class="text-4xl font-black text-gray-900 mb-2 sans uppercase tracking-tighter">You've Been Tested!</h2>
+            <div class="h-1 w-20 bg-red-600 mx-auto mb-6"></div>
+            
+            <p class="text-xl text-gray-800 mb-6 font-bold leading-relaxed">Gotcha! This entire website is 100% fake news, designed specifically to test your media literacy skills.</p>
+            
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 text-left mb-8">
+                <h4 class="font-bold text-yellow-800 sans uppercase tracking-wide mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Media Literacy Tips
+                </h4>
+                <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside font-serif">
+                    <li><strong>Check the URL:</strong> Is this a known, reliable news organization?</li>
+                    <li><strong>Verify Claims:</strong> If aliens are stealing cows, it would be on major networks, not just one obscure site.</li>
+                    <li><strong>Look for Satire:</strong> Check the footer, about page, or ridiculous sidebar articles (e.g., "Mayor Declares War on Clouds").</li>
+                    <li><strong>Trust Your Gut:</strong> If a story sounds too wild to be true, it probably is!</li>
+                </ul>
+            </div>
+
+            <button onclick="closeModal()" class="bg-gray-900 hover:bg-black text-white font-bold py-4 px-8 shadow-lg transition duration-300 sans text-lg uppercase tracking-widest w-full border-2 border-transparent hover:border-red-600">
+                I Promise to Check My Sources!
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center sans text-sm border-t-4 border-red-800 mt-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-widest">The Global Monitor<span class="text-red-600">News</span></h2>
+            <p class="mb-6 font-bold text-gray-500">"Truth in Every Syllable"</p>
+            <div class="flex justify-center space-x-6 mb-8 border-y border-gray-800 py-4">
+                <a href="#" class="hover:text-white transition">About Us</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+                <a href="#" class="hover:text-white transition">Careers</a>
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+            </div>
+            <p class="mb-2">© <span id="year"></span> The Global Monitor News Syndicate. All rights reserved.</p>
+            <p class="text-xs opacity-40 max-w-2xl mx-auto leading-relaxed mt-4">
+                Disclaimer: This website is a satirical project designed exclusively for media literacy education and family pranks. Any resemblance to real persons, living or dead, or actual cows, is purely coincidental. Do not use this site for actual news. If you believe aliens are stealing your livestock, please contact a qualified veterinarian or your local hardware store for more tin foil.
+            </p>
+        </div>
     </footer>
 
+    <script>
+        // Set dynamic dates to make it look current
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        document.getElementById('current-date').innerText = today.toLocaleDateString('en-US', dateOptions);
+        
+        // Format a nice "published" string (e.g. "March 16, 2026 at 8:42 AM")
+        const publishOptions = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+        document.getElementById('publish-date').innerText = today.toLocaleDateString('en-US', publishOptions) + " EST";
+        
+        document.getElementById('year').innerText = today.getFullYear();
+
+        // Reveal logic for the Dad Test
+        function revealPrank() {
+            const modal = document.getElementById('prank-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                content.classList.remove('scale-90');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('prank-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-90');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // --- ARTICLE SWAPPING LOGIC ---
+        const articleDatabase = {
+            'alien': {
+                tag: 'Exclusive Investigation',
+                category: 'Local News',
+                title: 'Alien Bovine Heist! Extraterrestrials Targeted Oakhaven Farms, Local Sheriff Claims',
+                author: 'By Arthur Pendelton',
+                authorTitle: 'Senior Paranormal Correspondent',
+                image: 'image_4b7f47.png',
+                caption: '<span class="font-bold text-red-400 uppercase tracking-wider">Fig 1:</span> A verified, leaked video still captured by local farmer Jedediah Smith shows an unidentified anomalous phenomenon (UAP) hovering over pasture 4 moments before the disappearances. (Credit: Oakhaven MUFON Chapter / Anonymous Source)',
+                body: `
+                    <p><span class="dropcap sans">O</span>AKHAVEN, KS — Residents of the quiet agricultural community of Oakhaven are double-locking their barn doors, rationing tin foil, and looking to the skies this week following a string of bizarre, allegedly extraterrestrial, livestock thefts that have baffled local law enforcement.</p>
+                    <p>According to Oakhaven County Sheriff "Big" Jim Higgins, over 40 head of prime dairy cattle have vanished without a trace over the past 72 hours. The only evidence left behind at the crime scenes? Perfectly circular scorch marks in the grass, flattened crop circles shaped suspiciously like milk cartons, and a lingering smell of ozone mixed with what Higgins describes as "burnt space-toast."</p>
+                    <div class="my-10 p-6 bg-gray-50 border-l-8 border-red-700 shadow-sm relative">
+                        <span class="absolute top-0 left-0 text-6xl text-gray-300 font-serif leading-none opacity-50 transform -translate-x-2 -translate-y-4">"</span>
+                        <p class="font-bold text-xl md:text-2xl italic text-gray-800 relative z-10">
+                            I've seen rustlers, I've seen coyotes, and I've seen teenagers pulling pranks. But coyotes don't leave anti-gravity footprints, and rustlers don't beam Holsteins up into the clouds using a neon green tractor beam.
+                        </p>
+                        <p class="mt-4 text-sm font-bold text-gray-500 uppercase sans tracking-wider">— Sheriff "Big" Jim Higgins</p>
+                    </div>
+                    <p>The epicenter of the abductions appears to be the Smith Family Farm, located just off Route 9. Patriarch Jedediah Smith claims he was awakened at 2:13 AM on Tuesday by a high-pitched humming sound that violently rattled his dental fillings and caused his compass to spin wildly.</p>
+                    <p>"I went out to the porch with my tactical flashlight," Smith recounted, his hands visibly shaking as he clutched a modified baseball cap lined with industrial-grade aluminum. "There was a massive silver disc hovering right over the main silo. It dropped a beam of pure, pulsating green light down on my prize-winning heifer, Bessie. She floated right up into the belly of that ship, mooing a tune I've never heard before. Sounded almost exactly like a 56k dial-up modem connecting to the internet."</p>
+                    <h3 class="text-3xl font-black mt-10 mb-4 sans uppercase border-b-2 border-gray-200 pb-2">A Government Cover-Up?</h3>
+                    <p>Local authorities attempted to contact federal agencies regarding the missing herd, but an anonymous whistle-blower within the Department of Agriculture claims they were immediately instructed to classify the missing cows as a "mass sudden spontaneous localized migration event."</p>
+                    <p>Dr. Aris Thorne, a self-proclaimed ufologist and former podiatrist who arrived in Oakhaven shortly after the news broke on local radio, believes the aliens are harvesting the cows for a highly advanced, sinister purpose.</p>
+                    <p>"Cows possess a unique multi-chambered stomach system," Dr. Thorne explained, adjusting his thick-rimmed glasses during a town hall meeting. "It is highly probable, mathematically speaking, that extraterrestrial visitors from the Zeta Reticuli system are utilizing concentrated bovine digestive enzymes to fuel their hyper-drive engines. It is basic intergalactic thermodynamics."</p>
+                    <p>While a few skeptics point out that the Smith farm's fencing was recently described as "shoddy at best" and that a regional lucrative cattle auction was held the very same night, locals remain deeply unconvinced by conventional explanations. The town's sole hardware store has reportedly sold out of aluminum foil, high-powered spotlights, and an unusual amount of teriyaki beef jerky.</p>
+                    <p>As night falls on Oakhaven, the town holds its collective breath. Will the visitors return for more of Earth's livestock? Or have they finally acquired enough dairy for their cosmic needs? The Global Monitor News will continue to provide boots-on-the-ground updates on this developing intergalactic story.</p>
+                `
+            },
+            'markets': {
+                tag: 'Market Report',
+                category: 'Finance & Economy',
+                title: 'Global Markets Stabilize After Week of Unprecedented Volatility',
+                author: 'By Sarah Jenkins',
+                authorTitle: 'Senior Financial Analyst',
+                image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1000&q=80',
+                caption: 'Traders monitor stock indexes at the New York Stock Exchange floor following a tumultuous trading week.',
+                body: `
+                    <p><span class="dropcap sans">N</span>EW YORK, NY — After a blistering week of sell-offs that erased billions in global wealth, major indices finally found solid footing on Tuesday, closing moderately higher in a session marked by cautious optimism.</p>
+                    <p>The Dow Jones Industrial Average rose 245 points, or 0.7%, to close at 38,502. The broader S&P 500 added 1.1%, and the tech-heavy Nasdaq Composite led the recovery, climbing 1.6% as investors bought the dip on mega-cap technology stocks.</p>
+                    <p>"We are seeing a natural stabilization phase," explained Dr. Marcus Thorne, Chief Economist at Vanguard Capital. "The initial panic regarding the Federal Reserve's hinted rate hikes was overblown. The underlying macroeconomic fundamentals, particularly in consumer spending and labor, remain robust enough to weather a slight tightening."</p>
+                    <p>However, analysts warn that volatility may return as key inflation data is scheduled for release next Thursday. Until then, markets are expected to trade in a narrow, sideways channel.</p>
+                `
+            },
+            'battery': {
+                tag: 'Innovation',
+                category: 'Science & Tech',
+                title: 'Breakthrough in Solid-State Battery Tech Could Double EV Range',
+                author: 'By Dr. Elias Vance',
+                authorTitle: 'Technology Correspondent',
+                image: 'https://images.unsplash.com/photo-1509391366360-1200bcce9a65?auto=format&fit=crop&w=1000&q=80',
+                caption: 'A glowing visualization of solid-state lattice structures used in next-generation energy storage.',
+                body: `
+                    <p><span class="dropcap sans">B</span>OSTON, MA — A team of researchers at the Massachusetts Institute of Technology (MIT) has published a groundbreaking paper detailing a new manufacturing process for solid-state lithium batteries, a development that could revolutionize the electric vehicle (EV) industry.</p>
+                    <p>Currently, most EVs rely on lithium-ion batteries that use liquid electrolytes. While effective, these batteries have physical limits on energy density and carry slight flammability risks. The new solid-state design replaces the liquid with a proprietary ceramic-polymer composite.</p>
+                    <p>"By solving the dendrite formation issue that has plagued solid-state research for a decade, we have effectively unlocked a pathway to double the energy density," stated lead researcher Dr. Amelia Chen. "In practical terms, an EV that currently gets 300 miles on a single charge could soon achieve upwards of 600 miles using the same physical battery footprint."</p>
+                    <p>Major automakers are already heavily invested in the technology, though commercialization at a massive scale is still estimated to be three to five years away due to supply chain logistics.</p>
+                `
+            },
+            'zoning': {
+                tag: 'Local Government',
+                category: 'Politics',
+                title: 'City Council Approves New Zoning Laws to Address Housing Shortage',
+                author: 'By Thomas Reed',
+                authorTitle: 'Metro Desk Reporter',
+                image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1000&q=80',
+                caption: 'The downtown skyline at dusk. Urban density is set to increase following the council\'s historic 5-2 vote.',
+                body: `
+                    <p><span class="dropcap sans">C</span>ITY HALL — In a contentious and marathon session that stretched past midnight, the City Council voted 5-2 to approve a sweeping overhaul of the city’s residential zoning codes, aiming to alleviate the ongoing affordable housing crisis.</p>
+                    <p>The new ordinance, known as the "Urban Density Act," eliminates single-family exclusive zoning in neighborhoods located within a half-mile of major transit hubs. Property owners in these designated zones will now have the automatic right to build duplexes, triplexes, and accessory dwelling units (ADUs) without requiring special permits.</p>
+                    <p>"For too long, restrictive zoning has artificially constrained housing supply, driving prices out of reach for working-class families," argued Councilmember Elena Rostova, the bill’s primary sponsor. "Tonight, we took a monumental step toward building a more inclusive and sustainable city."</p>
+                    <p>Opponents of the bill, largely composed of neighborhood preservation associations, argue the changes will alter the historic character of suburbs and strain local infrastructure like parking and sewage systems.</p>
+                `
+            },
+            'flu': {
+                tag: 'Public Health',
+                category: 'Health & Wellness',
+                title: 'Health Officials Advise Caution as Early Flu Season Impacts Midwest',
+                author: 'By Dr. Lisa Hartman',
+                authorTitle: 'Medical Contributor',
+                image: 'https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=1000&q=80',
+                caption: 'Medical staff walk through the corridors of a regional hospital experiencing a surge in respiratory illnesses.',
+                body: `
+                    <p><span class="dropcap sans">C</span>HICAGO, IL — The Centers for Disease Control and Prevention (CDC) has issued an early advisory for several Midwestern states following a sharp and unseasonal spike in Influenza A cases.</p>
+                    <p>Hospitals in Illinois, Ohio, and Michigan are reporting a 15% increase in respiratory-related emergency room visits compared to the same time last year. The dominant strain currently circulating appears to be H3N2, a variant known to cause more severe symptoms, particularly in the elderly and immunocompromised individuals.</p>
+                    <p>"We are seeing the flu curve shift forward by about four weeks," said Dr. Aaron Miller, director of the Midwest Regional Health Taskforce. "While it is too early to determine the ultimate severity of the season, the rapid onset is concerning. We strongly advise the public to get their annual flu vaccinations as soon as possible."</p>
+                    <p>In addition to vaccinations, health officials are reminding residents to practice standard hygiene protocols, including frequent handwashing and staying home when exhibiting symptoms such as fever, body aches, and severe fatigue.</p>
+                `
+            }
+        };
+
+        function loadArticle(articleId) {
+            const article = articleDatabase[articleId];
+            if (!article) return;
+
+            // Update DOM elements
+            document.getElementById('article-tag').innerText = article.tag;
+            document.getElementById('article-category').innerText = article.category;
+            document.getElementById('article-title').innerText = article.title;
+            document.getElementById('article-author').innerText = article.author;
+            document.getElementById('article-author-title').innerText = article.authorTitle;
+            document.getElementById('article-image').src = article.image;
+            document.getElementById('article-caption').innerHTML = article.caption;
+            document.getElementById('article-body').innerHTML = article.body;
+
+            // Scroll to top of article smoothly
+            document.getElementById('main-article').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
 </body>
 </html>
