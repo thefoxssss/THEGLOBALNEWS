@@ -1,1 +1,313 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Global Monitor News</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #c53030;
+            --bg-color: #f7fafc;
+            --text-color: #2d3748;
+            --light-text: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Main Content Layout */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Featured Article */
+        .featured-article {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-placeholder {
+            background-color: #e2e8f0;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 1.2rem;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .tag {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .featured-article h2 {
+            font-size: 2rem;
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+
+        /* Article Grid */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card .img-placeholder {
+            height: 180px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .trending-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        .trending-item p {
+            font-size: 0.85rem;
+            color: var(--light-text);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .img-placeholder {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">The Global <span>Monitor</span> News</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">World</a></li>
+                    <li><a href="#">Politics</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Tech</a></li>
+                    <li><a href="#">Science</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-articles">
+            <article class="featured-article">
+                <div class="img-placeholder">[Featured Image Placeholder]</div>
+                <div class="article-content">
+                    <span class="tag">Breaking</span>
+                    <h2>Global Summit Reaches Historic Agreement on Climate Action</h2>
+                    <p>Leaders from over 150 nations have signed a comprehensive treaty aiming to accelerate the transition to renewable energy systems by the end of the decade...</p>
+                </div>
+            </article>
+
+            <div class="article-grid">
+                <article class="card">
+                    <div class="img-placeholder">[Image]</div>
+                    <div class="article-content">
+                        <span class="tag" style="background-color: #3182ce;">Tech</span>
+                        <h3>New AI Breakthrough Changes Software Development</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="img-placeholder">[Image]</div>
+                    <div class="article-content">
+                        <span class="tag" style="background-color: #38a169;">Economy</span>
+                        <h3>Markets Rally as Inflation Shows Signs of Cooling</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="img-placeholder">[Image]</div>
+                    <div class="article-content">
+                        <span class="tag" style="background-color: #d69e2e;">Science</span>
+                        <h3>Astronomers Discover Earth-Sized Exoplanet</h3>
+                    </div>
+                </article>
+                <article class="card">
+                    <div class="img-placeholder">[Image]</div>
+                    <div class="article-content">
+                        <span class="tag" style="background-color: #805ad5;">Culture</span>
+                        <h3>The Rise of Digital Art in Modern Museums</h3>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <h3>Trending Now</h3>
+            <div class="trending-item">
+                <h4><a href="#">Election results finalize in key battleground states</a></h4>
+                <p>2 hours ago</p>
+            </div>
+            <div class="trending-item">
+                <h4><a href="#">Major tech CEO announces surprise resignation</a></h4>
+                <p>4 hours ago</p>
+            </div>
+            <div class="trending-item">
+                <h4><a href="#">Breakthrough in battery longevity reported</a></h4>
+                <p>6 hours ago</p>
+            </div>
+            <div class="trending-item">
+                <h4><a href="#">Global supply chains stabilize after months of delay</a></h4>
+                <p>8 hours ago</p>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 The Global Monitor News. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
